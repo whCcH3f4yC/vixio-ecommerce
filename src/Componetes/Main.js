@@ -5,28 +5,35 @@ const Main = () => {
   const [data, setData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
 
+  function handleClick(e) {
+    e.preventDefault();
+    setCategoria("/category/" + e.target.innerText.toLowerCase());
+  }
+
   React.useEffect(() => {
     fetch(`https://fakestoreapi.com/products${categoria ? categoria : ""}`)
       .then((Response) => Response.json())
-      .then((json) => setData(json));
-    setLoading(false);
+      .then((json) => {
+        setData(json);
+        setLoading(false);
+      });
   }, [categoria]);
 
   if (loading) {
-    return <div className="text.certer"> Carregando...</div>;
+    return <div className="text-center p-5 ">Carregando...</div>;
   }
 
   return (
     <>
-      <div className="p-3 bg-light mb-4  text-center ">
+      <div className="p-3 bg-light mb-4 text-center">
         <nav>
-          <ul className=" list-unstyled d-flex justify-content-center ">
+          <ul className="list-unstyled d-flex justify-content-center">
             <li>
               <a
-                href="null"
-                className=" me-5  text-decoration-none text-black fw-semibold "
+                href="/"
+                className="me-5 text-decoration-none text-black fw-semibold"
                 type="button"
-                onClick={() => setCategoria()}
+                onClick={() => setCategoria(null)}
               >
                 Home
               </a>
@@ -34,57 +41,58 @@ const Main = () => {
 
             <li>
               <a
-                href="null"
-                className=" me-5 text-decoration-none text-black fw-semibold "
+                href="/electronics"
+                className="me-5 text-decoration-none text-black fw-semibold"
                 type="button"
-                onClick={(e) => setCategoria("/category/" + e.target.innerText)}
+                onClick={handleClick}
               >
-                electronics
+                Electronics
               </a>
             </li>
             <li>
               <a
-                href="null"
-                className=" me-5 text-decoration-none text-black fw-semibold "
+                href="/jewelery"
+                className="me-5 text-decoration-none text-black fw-semibold"
                 type="button"
-                onClick={(e) => setCategoria("/category/" + e.target.innerText)}
+                onClick={handleClick}
               >
-                jewelery
+                Jewelery
               </a>
             </li>
             <li>
               <a
-                href="null"
-                className=" me-5 text-decoration-none text-black fw-semibold "
+                href="/mens-clothing"
+                className="me-5 text-decoration-none text-black fw-semibold"
                 type="button"
-                onClick={(e) => setCategoria("/category/" + e.target.innerText)}
+                onClick={handleClick}
               >
-                men's clothing
+                Men's Clothing
               </a>
             </li>
-            <li>
+            <li className="nav-link">
               <a
-                href="null"
-                className=" me-5 text-decoration-none text-black fw-semibold "
+                href="/womens-clothing"
+                aria-current="page"
+                className="me-5 text-decoration-none text-black fw-semibold"
                 type="button"
-                onClick={(e) => setCategoria("/category/" + e.target.innerText)}
+                onClick={handleClick}
               >
-                women's clothing
+                Women's Clothing
               </a>
             </li>
           </ul>
         </nav>
       </div>
-      <section className=" container ">
+      <section className="container">
         <div className="row mb-5">
           {data &&
             data.map((produto) => (
               <div
                 key={produto.id}
-                className="card m-1 "
+                className="card m-1"
                 style={{ width: "20rem" }}
               >
-                <div className="d-flex justify-content-center ">
+                <div className="d-flex justify-content-center">
                   <img className="img" src={produto.image} alt="..." />
                 </div>
                 <div className="card-body">
@@ -92,8 +100,8 @@ const Main = () => {
                   <p className="card-text descriptionProduct">
                     {produto.description}
                   </p>
-                  <div className="d-flex justify-content-center ">
-                    <a href="null" className=" btn btn-sm  btn-primary">
+                  <div className="d-flex justify-content-center">
+                    <a href="null" className="btn btn-sm btn-primary">
                       Saiba mais
                     </a>
                   </div>
