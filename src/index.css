@@ -1,0 +1,26 @@
+body {
+  background-color: #E3E6E6;
+}
+
+.img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.descriptionProduct {
+  
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.titleProduct {
+  height: 70px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
